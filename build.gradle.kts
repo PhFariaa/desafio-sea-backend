@@ -19,6 +19,8 @@ dependencies {
     implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0")
     implementation("jakarta.validation:jakarta.validation-api")
+    implementation("org.springdoc:springdoc-openapi-ui:1.8.0")
+
 
     runtimeOnly("org.postgresql:postgresql")
 

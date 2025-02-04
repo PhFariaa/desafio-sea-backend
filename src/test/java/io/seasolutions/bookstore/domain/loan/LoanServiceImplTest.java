@@ -183,4 +183,32 @@ class LoanServiceImplTest {
         assertEquals(result, List.of(loanFactory.createLoanShowDetailsDTO(loan.getIsActive(), loan.getBook().isLoaned())));
     }
 
+    @Test
+    @DisplayName("Loan Service findByUserId method return EntityNotFoundException")
+    void loanServiceFindByUserIdEntityNotFoundException(){
+        when(loanRepository.findByUserId(any(), any())).thenThrow(new EntityNotFoundException(MessageError.USER_NOT_FOUND.getMessage()));
+        assertThrows(EntityNotFoundException.class, () -> loanService.findByUserId(1L, null));
+    }
+
+    @Test
+    @DisplayName("Loan Service findActiveByUserId method return Success")
+    void loanServicefindActiveByUserIdMethodSuccess() {
+        Loan loan = loanFactory.createLoan();
+        loan.getBook().setLoaned(true);
+        loan.setIsActive(true);
+
+        when(loanRepository.findByUserIdAndIsActiveIsTrue(any())).thenReturn(List.of(loan));
+        List<LoanShowDetailsDTO> result = loanService.findActiveByUserId(1L, null);
+        assertNotNull(result);
+        assertEquals(result, List.of(loanFactory.createLoanShowDetailsDTO(loan.getIsActive(), loan.getBook().isLoaned())));
+    }
+
+    @Test
+    @DisplayName("Loan Service findActiveByUserId method return EntityNotFoundException")
+    void loanServicefindActiveByUserIdMethodEntityNotFoundException(){
+
+        when(loanRepository.findByUserIdAndIsActiveIsTrue(any())).thenThrow(new EntityNotFoundException(MessageError.USER_NOT_FOUND.getMessage()));
+        assertThrows(EntityNotFoundException.class, () -> loanService.findActiveByUserId(1L, null));
+    }
+
 }
