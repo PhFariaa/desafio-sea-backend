@@ -38,7 +38,7 @@ public class AuthorServiceImpl implements AuthorService{
 
     @Override
     public List<AuthorDTO> findAll(Pageable pageable) {
-        return this.authorRepository.findAll().stream().map(AuthorDTO::new).toList();
+        return this.authorRepository.findAll(pageable).stream().map(AuthorDTO::new).toList();
     }
 
     @Override

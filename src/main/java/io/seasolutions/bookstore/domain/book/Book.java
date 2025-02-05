@@ -20,10 +20,8 @@ public class Book {
     private String title;
     private String isbn;
 
-    @Column(name = "publication_date")
     private LocalDate publicationDate;
 
-    @Column(name = "number_of_pages")
     private Integer numberOfPages;
 
     @ManyToMany (cascade = CascadeType.PERSIST)
